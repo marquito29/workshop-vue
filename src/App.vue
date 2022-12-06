@@ -1,3 +1,9 @@
+<script setup></script>
+
 <template>
-  <div>Coucou app jhbhj</div>
+  <v-app>
+    <v-main>
+      <v-btn color="secondary">Hello</v-btn>
+    </v-main>
+  </v-app>
 </template>
