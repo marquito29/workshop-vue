@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h2 {
+    @apply text-3xl font-bold;
+  }
+
+  h3 {
+    @apply text-2xl font-bold;
+  }
+
+  input[type=text], input[type=date], select {
+    @apply border rounded-lg px-2 py-1 outline-none w-full;
+  }
+
+  .button {
+    @apply text-white bg-primary-500 hover:bg-primary-400 rounded-lg px-4 py-2 pointer inline-block;
+  }
+
+  .card {
+    @apply bg-white rounded-xl p-6 border rounded-xl;
+  }
+
+  .label {
+    @apply font-semibold mb-2;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
+}
+
+.container {
+  max-width: 1100px;
+  @apply mx-auto;
+}
