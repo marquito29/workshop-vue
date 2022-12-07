@@ -1,91 +1,80 @@
-<script setup></script>
+<script setup>
+import { reactive, ref } from "vue";
+import { defineEmits } from "vue";
+
+const emit = defineEmits(["recupereLeForm"]);
+const props = defineProps({
+  type: String,
+});
+
+const DOMAINES = ["Agroalimentaire", "Transport", "Menuiserie", "Restauration"];
+
+const VILLES = ["Brest"];
+
+const entries = ref([
+  {
+    name: "Prénom",
+    value: "first_name",
+    type: "text",
+  },
+  {
+    name: "Nom",
+    value: "last_name",
+    type: "text",
+  },
+  {
+    name: "E-mail",
+    value: "email",
+    type: "text",
+  },
+  {
+    name: "Ville",
+    value: "city",
+    type: "select",
+    items: VILLES,
+  },
+  {
+    name: "Date de naissance",
+    value: "postal_code",
+    type: "date",
+  },
+  {
+    name: "Domaines",
+    value: "domains",
+    type: "select",
+    items: DOMAINES,
+  },
+]);
+
+const form = reactive({
+  first_name: undefined,
+  last_name: undefined,
+  email: undefined,
+  city: undefined,
+  birthdate: undefined,
+});
+
+const sendForm = async () => {
+  emit("recupereLeForm", form);
+};
+</script>
 
 <template>
-  <v-form v-model="valid">
-    <v-card>
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          md="12"
-        >
-          <v-text-field
-            v-model="firstname"
-            :rules="nameRules"
-            :counter="10"
-            label="Prénom"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          md="12"
-        >
-          <v-text-field
-            v-model="lastname"
-            :rules="nameRules"
-            label="Nom"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          md="12"
-        >
-          <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            label="E-mail"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col
-          cols="12"
-          md="12"
-        >
-          <v-text-field
-            v-model="city"
-            :rules="cityRule"
-            label="Ville"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col
-          cols="12"
-          md="12"
-        >
-          <v-text-field
-            v-model="birthdate"
-            :rules="birthdateRule"
-            label="Date de naissance"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-select
-        label="Domaine de compétences"
-        :items="['Agroalimentaire','Transport','Menuiserie','Restauration']"
-        ></v-select>
-      </v-row>
-      <v-btn @click="valider">Enregistrer</v-btn>
-    </v-container>
-    </v-card>
-
-  </v-form>
+  <div class="Form">
+    <header class="mb-4">
+      <h2 class="mb-2">Ajouter un nouveau {{ props.type }}</h2>
+    </header>
+    <div class="flex flex-col w-72 mb-8">
+      <div v-for="(item, index) in entries" :key="index" class="mb-2">
+        <p class="label">{{ item.name }}</p>
+        <select v-if="item.type === 'select'">
+          <option v-for="option in item.items" :key="option" :value="option">
+            {{ option }}
+          </option>
+        </select>
+        <input v-else :type="item.type" v-model="form[item.value]" />
+      </div>
+    </div>
+    <div class="button inline-block" @click="sendForm">Ajouter</div>
+  </div>
 </template>
-
-<style scoped>
-.v-form{
-    background-color: #ffffff;
-}
-button{
-    background-color: #27C7D4;
-    color:#ffffff;
-}
-button:hover{
-    background-color: #EA5863;
-    color:#FE9063;
-    transition: all 0.2s ease-in-out;
-}
-</style>

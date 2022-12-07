@@ -1,53 +1,50 @@
 <script setup>
-const isValidated = false
-const isTyping = true
+import { reactive } from "vue";
+import { useMain } from "@/stores/main";
+import { useRouter } from "vue-router";
 
-const checkForm = () => {
-  if (!isTyping) {
-    loginAction()
+const router = useRouter();
+
+const store = useMain();
+
+const state = reactive({
+  loading: false,
+  disabled: false,
+  error: undefined,
+});
+
+const sendLogin = async () => {
+  try {
+    state.loading = true;
+    // supabase
+    store.addUser({
+      id: "1",
+      name: "John",
+      email: "johndoe@example.com",
+      password: "123456",
+    });
+
+    router.push("/");
+  } catch (error) {
+    console.log(error);
+  } finally {
+    state.loading = false;
   }
-}
-
+};
 </script>
 
 <template>
-  <div>
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <v-card>
-            <v-card-text>
-              <v-form>
-                <v-text-field
-                  v-model="email"
-                  label="Email"
-                  required
-                  ></v-text-field>
-              </v-form>
-            </v-card-text>
-            <v-btn @submit="checkForm">Se connecter</v-btn>
-          </v-card>
-        </v-col>
-      </v-row>
-      </v-container>
+  <div class="Login h-screen w-full flex flex-col items-center">
+    <h3 class="my-12">Mission Locale Brestoise</h3>
+    <div class="card w-96">
+      <h3 class="mb-4">Se connecter à l'application</h3>
+      <input
+        type="text"
+        placeholder="email@mail.com"
+        class="mb-2"
+        v-model="state.email"
+      />
+      <div class="button">Se connecter</div>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.v-card{
-  background-color: #ffffff;
-}
-.v-main{
-  background-color:#FE9063;
-}
-button{
-    background-color: #27C7D4;
-    color:#ffffff;
-    margin: 20px;
-}
-button:hover{
-    background-color: #EA5863;
-    color:#FE9063;
-    transition: all 0.2s ease-in-out;
-}
-</style>
