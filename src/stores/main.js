@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia'
+import { ref, computed } from 'vue'
 
-
-
-export const useMainStore = defineStore('main', () => {
-  const user = ref(undefined)
+export const useMain = defineStore('main', () => {
+  const user = ref(null)
   const getCurrentUser = computed(() => (user.value))
   function addUser(_user) {
     user.value = _user

@@ -1,17 +1,22 @@
 <script setup>
 import { ref } from "vue";
-import Form from "@/components/Form.vue"
-const sendParrain = () => {
-  console.log("J'envoi dans la bdd parrain");
-}
+import Form from "@/components/Form.vue";
 
-const type = ref("parrain")
+const TYPE = "parrain";
 
+const appelALaBaseDeDonneesParrain = (form) => {
+  // je récupère le form et j'appelle la BDD
+  // LOGIQUE PARRAIN EST ICI AVEC FORM
+  console.log(
+    "recu sur Parrain/New.vue => fonction appelALaBaseDeDonneesParrain"
+  );
+  console.log(form);
+};
 </script>
 
 <template>
   <div>
-    <Form type="type"></Form>
+    <Form @recupereLeForm="appelALaBaseDeDonneesParrain" :type="TYPE"></Form>
   </div>
 </template>
 

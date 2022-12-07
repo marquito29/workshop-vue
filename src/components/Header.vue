@@ -1,66 +1,43 @@
 <script setup>
-//import { useCounterStore } from "@/stores/main";
+import { ref } from "vue";
+import { useMain } from "@/stores/main.js";
+import Avatar from "./Avatar.vue";
 
-//const counterStore = useCounterStore();
+const store = useMain();
 
-import { ref } from "vue"
 const menu = ref([
-    {
-        label: "Home",
-        link: "/",
-    },
-    {
-        label: "Filleuls",
-        link: "/filleuls",
-    },
-    {
-        label: "Parrains",
-        link: "/parrains",
-    }
-])
+  {
+    label: "Acceuil",
+    link: "/",
+  },
+  {
+    label: "Filleuls",
+    link: "/filleuls",
+  },
+  {
+    label: "Parrains",
+    link: "/parrains",
+  },
+]);
 
 const openUrl = () => {
-    window.open("https://github.com", "_blank")
-}
-
+  window.open("https://github.com", "_blank");
+};
 </script>
 
 <template>
-  <div>
-    <!--{{ counterStore.count }}-->
-    <RouterLink class="menu" v-for="item,index in menu" :key="index" :to="item.link">
+  <div class="Header flex items-center p-4 border-b">
+    <h2 class="text-primary-500 lg:text-3xl font-bold mr-6">Mission locale</h2>
+    <div class="menu flex items-center grow">
+      <RouterLink
+        class="p-2 hover:text-blue-500"
+        v-for="(item, index) in menu"
+        :key="index"
+        :to="item.link"
+      >
         {{ item.label }}
-    </RouterLink>
-    <!--<p @click="openUrl">lien vers Guillaume</p>-->
+      </RouterLink>
+    </div>
+    <Avatar v-if="store.user" :user="store.user" />
   </div>
 </template>
-
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap');
-a {
-  font-family: 'Red Hat Display', sans-serif;
-  color: #27C7D4;
-  text-decoration: none;
-  cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.5rem 1rem;
-}
-
-a:hover {
-  text-decoration: none;
-  color: #FE9063;
-  transition: all 0.2s ease-in-out;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  background-color: #EA586363;
-  cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-</style>

@@ -1,16 +1,21 @@
 <script setup>
-import { ref } from "vue"
-import Form from "@/components/Form.vue"
-const sendFilleul = () => {
-  console.log("J'envoi dans la bdd filleul");
-}
+import { ref } from "vue";
+import Form from "@/components/Form.vue";
 
-const type = ref('filleul')
+const TYPE = ref("filleul");
 
+const appelALaBaseDeDonneesFilleul = (form) => {
+  // je récupère le form et j'appelle la BDD
+  // LOGIQUE FILLEUL EST ICI AVEC FORM
+  console.log(
+    "recu sur Filleul/New.vue => fonction appelALaBaseDeDonneesFilleul"
+  );
+  console.log(form);
+};
 </script>
 
 <template>
   <div>
-    <Form :type="type"></Form>
+    <Form :type="TYPE" @recupereLeForm="appelALaBaseDeDonneesFilleul"></Form>
   </div>
 </template>
