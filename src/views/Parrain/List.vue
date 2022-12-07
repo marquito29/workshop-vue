@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    Liqte de parrains
+    Liste de parrains
     <RouterLink to="/parrains/new">Nouveau Parrain</RouterLink>
   </div>
 </template>

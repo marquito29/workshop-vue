@@ -33,3 +33,9 @@ const isLoggedIn = ref(true)
     </v-main>
   </v-app>
 </template>
+
+<style scoped>
+.v-main{
+  background-color: #EA5863;
+}
+</style>

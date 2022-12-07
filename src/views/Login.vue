@@ -1,4 +1,14 @@
-<script setup></script>
+<script setup>
+const isValidated = false
+const isTyping = true
+
+const checkForm = () => {
+  if (!isTyping) {
+    loginAction()
+  }
+}
+
+</script>
 
 <template>
   <div>
@@ -15,7 +25,7 @@
                   ></v-text-field>
               </v-form>
             </v-card-text>
-            <v-btn>Se connecter</v-btn>
+            <v-btn @submit="checkForm">Se connecter</v-btn>
           </v-card>
         </v-col>
       </v-row>
