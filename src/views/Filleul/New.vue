@@ -1,16 +1,17 @@
 <script setup>
-import { ref } from "vue";
 import Form from "@/components/Form.vue";
+import { useApi } from "../../composables/useApi";
+import { useRouter } from "vue-router";
 
-const TYPE = ref("filleul");
+const router = useRouter();
+const TYPE = "filleul";
+const { setUser } = useApi();
 
-const appelALaBaseDeDonneesFilleul = (form) => {
-  // je récupère le form et j'appelle la BDD
-  // LOGIQUE FILLEUL EST ICI AVEC FORM
-  console.log(
-    "recu sur Filleul/New.vue => fonction appelALaBaseDeDonneesFilleul"
-  );
-  console.log(form);
+const appelALaBaseDeDonneesFilleul = async (form) => {
+  const response = await setUser(form)
+  console.log("OK filleul ajoutés")
+  router.push('/filleuls')
+
 };
 </script>
 

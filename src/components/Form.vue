@@ -52,6 +52,7 @@ const form = reactive({
   email: undefined,
   city: undefined,
   birthdate: undefined,
+  type: props.type
 });
 
 const sendForm = async () => {

@@ -2,6 +2,7 @@
 import { reactive } from "vue";
 import { useMain } from "@/stores/main";
 import { useRouter } from "vue-router";
+import { supabase } from "../supabase";
 
 const router = useRouter();
 
@@ -11,20 +12,17 @@ const state = reactive({
   loading: false,
   disabled: false,
   error: undefined,
+  email: undefined,
 });
 
 const sendLogin = async () => {
   try {
     state.loading = true;
+    const { data,error } = await supabase.auth.signInWithOtp({
+        email: state.email,
+      })
     // supabase
-    store.addUser({
-      id: "1",
-      name: "John",
-      email: "johndoe@example.com",
-      password: "123456",
-    });
-
-    router.push("/");
+    console.log(data)
   } catch (error) {
     console.log(error);
   } finally {
@@ -44,7 +42,7 @@ const sendLogin = async () => {
         class="mb-2"
         v-model="state.email"
       />
-      <div class="button">Se connecter</div>
+      <div class="button" @click="sendLogin">Se connecter</div>
     </div>
   </div>
 </template>
