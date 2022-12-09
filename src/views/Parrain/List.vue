@@ -7,9 +7,8 @@ let parrains = ref([])
 const fetchParrains = async () => {
   try {
     let { data: users, error } = await supabase
-      .from('users')
+      .from('parrains')
       .select('*')
-      .eq('type', 'parrain')
       parrains.value = users
     console.log(parrains.value)
     console.log(users)

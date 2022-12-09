@@ -7,9 +7,8 @@ let filleuls = ref([])
 const fetchFilleuls = async () => {
   try {
     let { data: users, error } = await supabase
-      .from('users')
+      .from('filleuls')
       .select('*')
-      .eq('type', 'filleul')
       filleuls.value = users
 
   } catch (e) {

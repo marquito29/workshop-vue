@@ -7,3 +7,7 @@ export function useHelpers() {
     openUrl
   }
 }
+
+export function getPrenomNom(user) {(
+  user.first_name +" "+user.last_name
+)}

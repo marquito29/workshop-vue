@@ -3,11 +3,6 @@ import { reactive, ref } from "vue";
 import { defineEmits } from "vue";
 
 const emit = defineEmits(["recupereLeForm"]);
-const props = defineProps({
-  type: String,
-});
-
-let isValid = ref(false)
 
 const DOMAINES = ["Agroalimentaire", "Transport", "Menuiserie", "Restauration"];
 
@@ -54,18 +49,17 @@ const form = reactive({
   email: undefined,
   city: undefined,
   birthdate: undefined,
-  type: props.type
 });
 
-const checkForm = () => {
-  console.log(isValid.value)
+// const checkForm = () => {
+//   console.log(isValid.value)
 
-  if (form.first_name === undefined || form.last_name === undefined || form.email === undefined || form.birthdate === undefined) {
-    isValid.value = false
-  } else {
-    isValid.value = true
-  }
-}
+//   if (form.first_name === undefined || form.last_name === undefined || form.email === undefined || form.birthdate === undefined) {
+//     isValid.value = false
+//   } else {
+//     isValid.value = true
+//   }
+// }
 
 const sendForm = async () => {
   console.log(form)
@@ -81,7 +75,7 @@ const sendForm = async () => {
 <template>
   <div class="Form">
     <header class="mb-4">
-      <h2 class="mb-2">Ajouter un nouveau {{ props.type }}</h2>
+      <h2 class="mb-2">Ajouter un nouveau parrain</h2>
     </header>
     <div class="flex flex-col w-72 mb-8">
       <div v-for="(item, index) in entries" :key="index" class="mb-2">
@@ -94,6 +88,6 @@ const sendForm = async () => {
         <input v-else :type="item.type" v-model="form[item.value]" @keyup="checkForm" />
       </div>
     </div>
-    <div v-if="isValid===true" class="button inline-block" @click="sendForm">Ajouter</div>
+    <div class="button inline-block" @click="sendForm">Ajouter</div>
   </div>
 </template>
