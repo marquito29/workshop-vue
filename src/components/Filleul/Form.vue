@@ -80,8 +80,15 @@ const sendForm = async () => {
           </option>
         </select>
         <input v-else :type="item.type" v-model="form[item.value]" />
+        <p class="required">Champs obligatoire</p>
       </div>
     </div>
     <div class="button inline-block" @click="sendForm">Ajouter</div>
   </div>
 </template>
+
+<style scoped>
+.required { 
+  color:red;
+}
+</style>
